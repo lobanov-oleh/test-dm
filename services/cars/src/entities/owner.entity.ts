@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 
 @Entity('owner')
 export class OwnerEntity {
@@ -8,6 +8,11 @@ export class OwnerEntity {
   @Column({ length: 255 })
   name: string;
 
-  @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
+  @Column({ type: 'datetime' })
   purchaseDate: Date;
+
+  @BeforeInsert()
+  updateDates() {
+      this.purchaseDate = new Date();
+  }
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, ManyToMany, JoinTable, BeforeInsert } from 'typeorm';
 import { ManufacturerEntity } from './manufacturer.entity';
 import { OwnerEntity } from './owner.entity';
 
@@ -13,8 +13,13 @@ export class CarEntity {
   @Column('decimal', { precision: 10, scale: 2 })
   price: number;
 
-  @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
+  @Column({ type: 'datetime' })
   firstRegistationDate: Date;
+
+  @BeforeInsert()
+  updateDates() {
+      this.firstRegistationDate = new Date();
+  }
 
   @ManyToMany(type => OwnerEntity)
   @JoinTable()
