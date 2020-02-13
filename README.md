@@ -1,5 +1,13 @@
 # Test DM
 
+## Test
+
+```
+$ npm i
+$ npm test
+$ npm run test:e2e
+```
+
 ## Running the Project
 
 ```
