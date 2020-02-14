@@ -1,6 +1,8 @@
 # Test DM
 
-## Test
+## Testing
+
+`sqlite3` is required for test:e2e.
 
 ```
 $ npm i
